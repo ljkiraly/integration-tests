@@ -18,6 +18,6 @@
 package suites
 
 //go:generate bash -c "rm -rf ./suites"
-//go:generate gotestmd ../deployments-k8s/examples ./suites github.com/networkservicemesh/integration-tests/extensions/base
+//go:generate gotestmd ../nsm-deployments-k8s/examples ./suites github.com/networkservicemesh/integration-tests/extensions/base
 //go:generate goimports -w -local github.com/networkservicemesh -d "./suites"
 //go:generate goimports -w -local github.com/networkservicemesh/integration-tests -d "./suites"

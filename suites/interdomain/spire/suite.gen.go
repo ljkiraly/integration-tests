@@ -21,7 +21,7 @@ func (s *Suite) SetupSuite() {
 			v.SetupSuite()
 		}
 	}
-	r := s.Runner("../deployments-k8s/examples/interdomain/spire")
+	r := s.Runner("../nsm-deployments-k8s/examples/interdomain/spire")
 	s.T().Cleanup(func() {
 		r.Run(`export KUBECONFIG=$KUBECONFIG1 ` + "\n" + `kubectl delete crd spiffeids.spiffeid.spiffe.io` + "\n" + `kubectl delete ns spire` + "\n" + `` + "\n" + `export KUBECONFIG=$KUBECONFIG2` + "\n" + `kubectl delete crd spiffeids.spiffeid.spiffe.io` + "\n" + `kubectl delete ns spire` + "\n" + `` + "\n" + `export KUBECONFIG=$KUBECONFIG3` + "\n" + `kubectl delete crd spiffeids.spiffeid.spiffe.io` + "\n" + `kubectl delete ns spire`)
 	})
@@ -29,15 +29,15 @@ func (s *Suite) SetupSuite() {
 	r.Run(`[[ ! -z $KUBECONFIG2 ]]`)
 	r.Run(`[[ ! -z $KUBECONFIG3 ]]`)
 	r.Run(`export KUBECONFIG=$KUBECONFIG1`)
-	r.Run(`kubectl apply -k https://github.com/networkservicemesh/deployments-k8s/examples/interdomain/spire/cluster1?ref=17bf4171f764f37135945425e7ee8e5e0ef9b06e`)
+	r.Run(`kubectl apply -k https://github.com/networkservicemesh/deployments-k8s/examples/interdomain/spire/cluster1?ref=97ac28963a8e86054ced1884a04e241d53dfcdd4`)
 	r.Run(`kubectl wait -n spire --timeout=1m --for=condition=ready pod -l app=spire-agent`)
 	r.Run(`kubectl wait -n spire --timeout=1m --for=condition=ready pod -l app=spire-server`)
 	r.Run(`export KUBECONFIG=$KUBECONFIG2`)
-	r.Run(`kubectl apply -k https://github.com/networkservicemesh/deployments-k8s/examples/interdomain/spire/cluster2?ref=17bf4171f764f37135945425e7ee8e5e0ef9b06e`)
+	r.Run(`kubectl apply -k https://github.com/networkservicemesh/deployments-k8s/examples/interdomain/spire/cluster2?ref=97ac28963a8e86054ced1884a04e241d53dfcdd4`)
 	r.Run(`kubectl wait -n spire --timeout=1m --for=condition=ready pod -l app=spire-agent`)
 	r.Run(`kubectl wait -n spire --timeout=1m --for=condition=ready pod -l app=spire-server`)
 	r.Run(`export KUBECONFIG=$KUBECONFIG3`)
-	r.Run(`kubectl apply -k https://github.com/networkservicemesh/deployments-k8s/examples/interdomain/spire/cluster3?ref=17bf4171f764f37135945425e7ee8e5e0ef9b06e`)
+	r.Run(`kubectl apply -k https://github.com/networkservicemesh/deployments-k8s/examples/interdomain/spire/cluster3?ref=97ac28963a8e86054ced1884a04e241d53dfcdd4`)
 	r.Run(`kubectl wait -n spire --timeout=1m --for=condition=ready pod -l app=spire-agent`)
 	r.Run(`kubectl wait -n spire --timeout=1m --for=condition=ready pod -l app=spire-server`)
 	r.Run(`export KUBECONFIG=$KUBECONFIG1 && bundle1=$(kubectl exec spire-server-0 -n spire -- bin/spire-server bundle show -format spiffe)` + "\n" + `export KUBECONFIG=$KUBECONFIG2 && bundle2=$(kubectl exec spire-server-0 -n spire -- bin/spire-server bundle show -format spiffe)` + "\n" + `export KUBECONFIG=$KUBECONFIG3 && bundle3=$(kubectl exec spire-server-0 -n spire -- bin/spire-server bundle show -format spiffe)`)

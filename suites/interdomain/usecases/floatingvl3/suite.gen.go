@@ -23,7 +23,7 @@ func (s *Suite) SetupSuite() {
 			v.SetupSuite()
 		}
 	}
-	r := s.Runner("../deployments-k8s/examples/interdomain/usecases/FloatingVl3")
+	r := s.Runner("../nsm-deployments-k8s/examples/interdomain/usecases/FloatingVl3")
 	s.T().Cleanup(func() {
 		r.Run(`export KUBECONFIG=$KUBECONFIG3 kubectl delete -k ./cluster3`)
 		r.Run(`export KUBECONFIG=$KUBECONFIG2 kubectl delete -k ./cluster2`)

@@ -4,7 +4,7 @@ package rvlanvpp
 import (
 	"github.com/stretchr/testify/suite"
 
-	"github.com/networkservicemesh/integration-tests/extensions/base"
+	"github.com/ljkiraly/integration-tests/extensions/base"
 )
 
 type Suite struct {

@@ -4,11 +4,11 @@ package k8s_monolith
 import (
 	"github.com/stretchr/testify/suite"
 
-	"github.com/networkservicemesh/integration-tests/extensions/base"
-	"github.com/networkservicemesh/integration-tests/suites/k8s_monolith/dns"
-	"github.com/networkservicemesh/integration-tests/suites/k8s_monolith/docker"
-	"github.com/networkservicemesh/integration-tests/suites/k8s_monolith/loadbalancer"
-	"github.com/networkservicemesh/integration-tests/suites/k8s_monolith/spire"
+	"github.com/ljkiraly/integration-tests/extensions/base"
+	"github.com/ljkiraly/integration-tests/suites/k8s_monolith/dns"
+	"github.com/ljkiraly/integration-tests/suites/k8s_monolith/docker"
+	"github.com/ljkiraly/integration-tests/suites/k8s_monolith/loadbalancer"
+	"github.com/ljkiraly/integration-tests/suites/k8s_monolith/spire"
 )
 
 type Suite struct {

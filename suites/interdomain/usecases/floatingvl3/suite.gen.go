@@ -4,8 +4,8 @@ package floatingvl3
 import (
 	"github.com/stretchr/testify/suite"
 
-	"github.com/networkservicemesh/integration-tests/extensions/base"
-	"github.com/networkservicemesh/integration-tests/suites/interdomain"
+	"github.com/ljkiraly/integration-tests/extensions/base"
+	"github.com/ljkiraly/integration-tests/suites/interdomain"
 )
 
 type Suite struct {

@@ -4,11 +4,11 @@ package nsm_istio
 import (
 	"github.com/stretchr/testify/suite"
 
-	"github.com/networkservicemesh/integration-tests/extensions/base"
-	"github.com/networkservicemesh/integration-tests/suites/nsm_istio/dns"
-	"github.com/networkservicemesh/integration-tests/suites/nsm_istio/loadbalancer"
-	"github.com/networkservicemesh/integration-tests/suites/nsm_istio/nsm"
-	"github.com/networkservicemesh/integration-tests/suites/nsm_istio/spire"
+	"github.com/ljkiraly/integration-tests/extensions/base"
+	"github.com/ljkiraly/integration-tests/suites/nsm_istio/dns"
+	"github.com/ljkiraly/integration-tests/suites/nsm_istio/loadbalancer"
+	"github.com/ljkiraly/integration-tests/suites/nsm_istio/nsm"
+	"github.com/ljkiraly/integration-tests/suites/nsm_istio/spire"
 )
 
 type Suite struct {

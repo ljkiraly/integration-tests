@@ -4,10 +4,10 @@ package remotevlan
 import (
 	"github.com/stretchr/testify/suite"
 
-	"github.com/networkservicemesh/integration-tests/extensions/base"
-	"github.com/networkservicemesh/integration-tests/suites/remotevlan/rvlanovs"
-	"github.com/networkservicemesh/integration-tests/suites/remotevlan/rvlanvpp"
-	"github.com/networkservicemesh/integration-tests/suites/spire"
+	"github.com/ljkiraly/integration-tests/extensions/base"
+	"github.com/ljkiraly/integration-tests/suites/remotevlan/rvlanovs"
+	"github.com/ljkiraly/integration-tests/suites/remotevlan/rvlanvpp"
+	"github.com/ljkiraly/integration-tests/suites/spire"
 )
 
 type Suite struct {

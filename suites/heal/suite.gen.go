@@ -4,8 +4,8 @@ package heal
 import (
 	"github.com/stretchr/testify/suite"
 
-	"github.com/networkservicemesh/integration-tests/extensions/base"
-	"github.com/networkservicemesh/integration-tests/suites/basic"
+	"github.com/ljkiraly/integration-tests/extensions/base"
+	"github.com/ljkiraly/integration-tests/suites/basic"
 )
 
 type Suite struct {

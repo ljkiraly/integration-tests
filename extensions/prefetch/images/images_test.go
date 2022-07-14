@@ -14,6 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:build !darwin
 // +build !darwin
 
 package images_test
@@ -22,7 +23,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/networkservicemesh/integration-tests/extensions/prefetch/images"
+	"github.com/ljkiraly/integration-tests/extensions/prefetch/images"
 )
 
 var yamlFileMatch = func(s string) bool { return strings.HasSuffix(s, ".yaml") }

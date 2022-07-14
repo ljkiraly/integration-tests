@@ -18,7 +18,7 @@
 package sriov
 
 import (
-	"github.com/networkservicemesh/integration-tests/extensions/prefetch"
+	"github.com/ljkiraly/integration-tests/extensions/prefetch"
 )
 
 func init() {

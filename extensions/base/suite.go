@@ -21,10 +21,10 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/ljkiraly/integration-tests/extensions/checkout"
+	"github.com/ljkiraly/integration-tests/extensions/logs"
+	"github.com/ljkiraly/integration-tests/extensions/prefetch"
 	"github.com/networkservicemesh/gotestmd/pkg/suites/shell"
-	"github.com/networkservicemesh/integration-tests/extensions/checkout"
-	"github.com/networkservicemesh/integration-tests/extensions/logs"
-	"github.com/networkservicemesh/integration-tests/extensions/prefetch"
 )
 
 // Suite is a base suite for generating tests. Contains extensions that can be used for assertion and automation goals.

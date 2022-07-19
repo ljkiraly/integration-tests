@@ -21,7 +21,7 @@ func (s *Suite) SetupSuite() {
 			v.SetupSuite()
 		}
 	}
-	r := s.Runner("../nsm-deployments-k8s/examples/nsm_istio/dns")
+	r := s.Runner("../deployments-k8s/examples/nsm_istio/dns")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl --kubeconfig=$KUBECONFIG1 delete service -n kube-system exposed-kube-dns` + "\n" + `kubectl --kubeconfig=$KUBECONFIG2 delete service -n kube-system exposed-kube-dns`)
 	})

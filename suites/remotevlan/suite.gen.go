@@ -27,7 +27,7 @@ func (s *Suite) SetupSuite() {
 			v.SetupSuite()
 		}
 	}
-	r := s.Runner("../nsm-deployments-k8s/examples/remotevlan")
+	r := s.Runner("../deployments-k8s/examples/remotevlan")
 	s.T().Cleanup(func() {
 		r.Run(`WH=$(kubectl get pods -l app=admission-webhook-k8s -n nsm-system --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')` + "\n" + `kubectl delete mutatingwebhookconfiguration ${WH}` + "\n" + `kubectl delete ns nsm-system`)
 		r.Run(`docker network disconnect bridge-2 kind-worker` + "\n" + `docker network disconnect bridge-2 kind-worker2` + "\n" + `docker network rm bridge-2` + "\n" + `docker exec kind-worker ip link del ext_net1` + "\n" + `docker exec kind-worker2 ip link del ext_net1` + "\n" + `true`)

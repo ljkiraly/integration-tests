@@ -25,7 +25,7 @@ func (s *Suite) SetupSuite() {
 	}
 }
 func (s *Suite) TestDataplane_interrupt() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/dataplane-interrupt")
+	r := s.Runner("../deployments-k8s/examples/heal/dataplane-interrupt")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -48,7 +48,7 @@ func (s *Suite) TestDataplane_interrupt() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestLocal_forwarder_death() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/local-forwarder-death")
+	r := s.Runner("../deployments-k8s/examples/heal/local-forwarder-death")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -71,7 +71,7 @@ func (s *Suite) TestLocal_forwarder_death() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestLocal_forwarder_remote_forwarder() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/local-forwarder-remote-forwarder")
+	r := s.Runner("../deployments-k8s/examples/heal/local-forwarder-remote-forwarder")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -97,7 +97,7 @@ func (s *Suite) TestLocal_forwarder_remote_forwarder() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestLocal_nse_death() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/local-nse-death")
+	r := s.Runner("../deployments-k8s/examples/heal/local-nse-death")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -124,7 +124,7 @@ func (s *Suite) TestLocal_nse_death() {
 	r.Run(`kubectl exec ${NEW_NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.103`)
 }
 func (s *Suite) TestLocal_nsm_system_restart() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/local-nsm-system-restart")
+	r := s.Runner("../deployments-k8s/examples/heal/local-nsm-system-restart")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -147,7 +147,7 @@ func (s *Suite) TestLocal_nsm_system_restart() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestLocal_nsmgr_local_forwarder_memif() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/local-nsmgr-local-forwarder-memif")
+	r := s.Runner("../deployments-k8s/examples/heal/local-nsmgr-local-forwarder-memif")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -173,7 +173,7 @@ func (s *Suite) TestLocal_nsmgr_local_forwarder_memif() {
 	r.Run(`result=$(kubectl exec "${NSE}" -n "${NAMESPACE}" -- vppctl ping 172.16.1.101 repeat 4)` + "\n" + `echo ${result}` + "\n" + `! echo ${result} | grep -E -q "(100% packet loss)|(0 sent)|(no egress interface)"`)
 }
 func (s *Suite) TestLocal_nsmgr_local_nse_memif() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/local-nsmgr-local-nse-memif")
+	r := s.Runner("../deployments-k8s/examples/heal/local-nsmgr-local-nse-memif")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -201,7 +201,7 @@ func (s *Suite) TestLocal_nsmgr_local_nse_memif() {
 	r.Run(`result=$(kubectl exec "${NEW_NSE}" -n "${NAMESPACE}" -- vppctl ping 172.16.1.103 repeat 4)` + "\n" + `echo ${result}` + "\n" + `! echo ${result} | grep -E -q "(100% packet loss)|(0 sent)|(no egress interface)"`)
 }
 func (s *Suite) TestLocal_nsmgr_remote_nsmgr() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/local-nsmgr-remote-nsmgr")
+	r := s.Runner("../deployments-k8s/examples/heal/local-nsmgr-remote-nsmgr")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -227,7 +227,7 @@ func (s *Suite) TestLocal_nsmgr_remote_nsmgr() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestLocal_nsmgr_restart() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/local-nsmgr-restart")
+	r := s.Runner("../deployments-k8s/examples/heal/local-nsmgr-restart")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -250,7 +250,7 @@ func (s *Suite) TestLocal_nsmgr_restart() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestRegistry_local_endpoint() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/registry-local-endpoint")
+	r := s.Runner("../deployments-k8s/examples/heal/registry-local-endpoint")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -277,7 +277,7 @@ func (s *Suite) TestRegistry_local_endpoint() {
 	r.Run(`kubectl exec ${NEW_NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.103`)
 }
 func (s *Suite) TestRegistry_remote_forwarder() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/registry-remote-forwarder")
+	r := s.Runner("../deployments-k8s/examples/heal/registry-remote-forwarder")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -303,7 +303,7 @@ func (s *Suite) TestRegistry_remote_forwarder() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestRegistry_remote_nsmgr() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/registry-remote-nsmgr")
+	r := s.Runner("../deployments-k8s/examples/heal/registry-remote-nsmgr")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -329,7 +329,7 @@ func (s *Suite) TestRegistry_remote_nsmgr() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestRegistry_restart() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/registry-restart")
+	r := s.Runner("../deployments-k8s/examples/heal/registry-restart")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -357,7 +357,7 @@ func (s *Suite) TestRegistry_restart() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.103`)
 }
 func (s *Suite) TestRemote_forwarder_death() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/remote-forwarder-death")
+	r := s.Runner("../deployments-k8s/examples/heal/remote-forwarder-death")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -380,7 +380,7 @@ func (s *Suite) TestRemote_forwarder_death() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestRemote_forwarder_death_ip() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/remote-forwarder-death-ip")
+	r := s.Runner("../deployments-k8s/examples/heal/remote-forwarder-death-ip")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -403,7 +403,7 @@ func (s *Suite) TestRemote_forwarder_death_ip() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestRemote_nse_death() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/remote-nse-death")
+	r := s.Runner("../deployments-k8s/examples/heal/remote-nse-death")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -427,7 +427,7 @@ func (s *Suite) TestRemote_nse_death() {
 	r.Run(`kubectl exec ${NEW_NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.103`)
 }
 func (s *Suite) TestRemote_nse_death_ip() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/remote-nse-death-ip")
+	r := s.Runner("../deployments-k8s/examples/heal/remote-nse-death-ip")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -451,7 +451,7 @@ func (s *Suite) TestRemote_nse_death_ip() {
 	r.Run(`kubectl exec ${NEW_NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.103`)
 }
 func (s *Suite) TestRemote_nsm_system_restart_memif_ip() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/remote-nsm-system-restart-memif-ip")
+	r := s.Runner("../deployments-k8s/examples/heal/remote-nsm-system-restart-memif-ip")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -474,7 +474,7 @@ func (s *Suite) TestRemote_nsm_system_restart_memif_ip() {
 	r.Run(`result=$(kubectl exec "${NSE}" -n "${NAMESPACE}" -- vppctl ping 172.16.1.101 repeat 4)` + "\n" + `echo ${result}` + "\n" + `! echo ${result} | grep -E -q "(100% packet loss)|(0 sent)|(no egress interface)"`)
 }
 func (s *Suite) TestRemote_nsmgr_death() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/remote-nsmgr-death")
+	r := s.Runner("../deployments-k8s/examples/heal/remote-nsmgr-death")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl apply -k https://github.com/networkservicemesh/deployments-k8s/apps/nsmgr?ref=97ac28963a8e86054ced1884a04e241d53dfcdd4 -n nsm-system`)
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
@@ -503,7 +503,7 @@ func (s *Suite) TestRemote_nsmgr_death() {
 	r.Run(`kubectl exec ${NEW_NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.103`)
 }
 func (s *Suite) TestRemote_nsmgr_remote_endpoint() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/remote-nsmgr-remote-endpoint")
+	r := s.Runner("../deployments-k8s/examples/heal/remote-nsmgr-remote-endpoint")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -530,7 +530,7 @@ func (s *Suite) TestRemote_nsmgr_remote_endpoint() {
 	r.Run(`kubectl exec ${NEW_NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.103`)
 }
 func (s *Suite) TestRemote_nsmgr_restart() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/remote-nsmgr-restart")
+	r := s.Runner("../deployments-k8s/examples/heal/remote-nsmgr-restart")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -553,7 +553,7 @@ func (s *Suite) TestRemote_nsmgr_restart() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestRemote_nsmgr_restart_ip() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/remote-nsmgr-restart-ip")
+	r := s.Runner("../deployments-k8s/examples/heal/remote-nsmgr-restart-ip")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -576,7 +576,7 @@ func (s *Suite) TestRemote_nsmgr_restart_ip() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestVl3_nscs_death() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/vl3-nscs-death")
+	r := s.Runner("../deployments-k8s/examples/heal/vl3-nscs-death")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ns-vl3`)
 	})
@@ -592,7 +592,7 @@ func (s *Suite) TestVl3_nscs_death() {
 	r.Run(`for nsc in $nscs ` + "\n" + `do` + "\n" + `    ipAddr=$(kubectl exec -n ns-vl3 $nsc -- ifconfig nsm-1)` + "\n" + `    ipAddr=$(echo $ipAddr | grep -Eo 'inet addr:[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'| cut -c 11-)` + "\n" + `    for pinger in $nscs` + "\n" + `    do` + "\n" + `        echo $pinger pings $ipAddr` + "\n" + `        kubectl exec $pinger -n ns-vl3 -- ping -c4 $ipAddr` + "\n" + `    done` + "\n" + `done`)
 }
 func (s *Suite) TestVl3_nse_death() {
-	r := s.Runner("../nsm-deployments-k8s/examples/heal/vl3-nse-death")
+	r := s.Runner("../deployments-k8s/examples/heal/vl3-nse-death")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ns-vl3`)
 	})

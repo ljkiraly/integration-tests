@@ -21,7 +21,7 @@ func (s *Suite) SetupSuite() {
 			v.SetupSuite()
 		}
 	}
-	r := s.Runner("../nsm-deployments-k8s/examples/interdomain/dns")
+	r := s.Runner("../deployments-k8s/examples/interdomain/dns")
 	s.T().Cleanup(func() {
 		r.Run(`export KUBECONFIG=$KUBECONFIG1 && kubectl delete service -n kube-system exposed-kube-dns` + "\n" + `export KUBECONFIG=$KUBECONFIG2 && kubectl delete service -n kube-system exposed-kube-dns` + "\n" + `export KUBECONFIG=$KUBECONFIG3 && kubectl delete service -n kube-system exposed-kube-dns`)
 	})

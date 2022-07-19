@@ -23,7 +23,7 @@ func (s *Suite) SetupSuite() {
 			v.SetupSuite()
 		}
 	}
-	r := s.Runner("../nsm-deployments-k8s/examples/basic")
+	r := s.Runner("../deployments-k8s/examples/basic")
 	s.T().Cleanup(func() {
 		r.Run(`WH=$(kubectl get pods -l app=admission-webhook-k8s -n nsm-system --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')` + "\n" + `kubectl delete mutatingwebhookconfiguration ${WH}` + "\n" + `kubectl delete ns nsm-system`)
 	})
@@ -32,7 +32,7 @@ func (s *Suite) SetupSuite() {
 	r.Run(`WH=$(kubectl get pods -l app=admission-webhook-k8s -n nsm-system --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')` + "\n" + `kubectl wait --for=condition=ready --timeout=1m pod ${WH} -n nsm-system`)
 }
 func (s *Suite) TestKernel2Kernel() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Kernel2Kernel")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Kernel2Kernel")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -50,7 +50,7 @@ func (s *Suite) TestKernel2Kernel() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestKernel2Memif() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Kernel2Memif")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Kernel2Memif")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -68,7 +68,7 @@ func (s *Suite) TestKernel2Memif() {
 	r.Run(`result=$(kubectl exec "${NSE}" -n "${NAMESPACE}" -- vppctl ping 172.16.1.101 repeat 4)` + "\n" + `echo ${result}` + "\n" + `! echo ${result} | grep -E -q "(100% packet loss)|(0 sent)|(no egress interface)"`)
 }
 func (s *Suite) TestKernel2Vxlan2Kernel() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Kernel2Vxlan2Kernel")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Kernel2Vxlan2Kernel")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -86,7 +86,7 @@ func (s *Suite) TestKernel2Vxlan2Kernel() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestKernel2Vxlan2Memif() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Kernel2Vxlan2Memif")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Kernel2Vxlan2Memif")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -104,7 +104,7 @@ func (s *Suite) TestKernel2Vxlan2Memif() {
 	r.Run(`result=$(kubectl exec "${NSE}" -n "${NAMESPACE}" -- vppctl ping 172.16.1.101 repeat 4)` + "\n" + `echo ${result}` + "\n" + `! echo ${result} | grep -E -q "(100% packet loss)|(0 sent)|(no egress interface)"`)
 }
 func (s *Suite) TestKernel2Wireguard2Kernel() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Kernel2Wireguard2Kernel")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Kernel2Wireguard2Kernel")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -122,7 +122,7 @@ func (s *Suite) TestKernel2Wireguard2Kernel() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestKernel2Wireguard2Memif() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Kernel2Wireguard2Memif")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Kernel2Wireguard2Memif")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -140,7 +140,7 @@ func (s *Suite) TestKernel2Wireguard2Memif() {
 	r.Run(`result=$(kubectl exec "${NSE}" -n "${NAMESPACE}" -- vppctl ping 172.16.1.101 repeat 4)` + "\n" + `echo ${result}` + "\n" + `! echo ${result} | grep -E -q "(100% packet loss)|(0 sent)|(no egress interface)"`)
 }
 func (s *Suite) TestMemif2Kernel() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Memif2Kernel")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Memif2Kernel")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -158,7 +158,7 @@ func (s *Suite) TestMemif2Kernel() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestMemif2Memif() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Memif2Memif")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Memif2Memif")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -176,7 +176,7 @@ func (s *Suite) TestMemif2Memif() {
 	r.Run(`result=$(kubectl exec "${NSE}" -n "${NAMESPACE}" -- vppctl ping 172.16.1.101 repeat 4)` + "\n" + `echo ${result}` + "\n" + `! echo ${result} | grep -E -q "(100% packet loss)|(0 sent)|(no egress interface)"`)
 }
 func (s *Suite) TestMemif2Vxlan2Kernel() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Memif2Vxlan2Kernel")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Memif2Vxlan2Kernel")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -194,7 +194,7 @@ func (s *Suite) TestMemif2Vxlan2Kernel() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestMemif2Vxlan2Memif() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Memif2Vxlan2Memif")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Memif2Vxlan2Memif")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -212,7 +212,7 @@ func (s *Suite) TestMemif2Vxlan2Memif() {
 	r.Run(`result=$(kubectl exec "${NSE}" -n "${NAMESPACE}" -- vppctl ping 172.16.1.101 repeat 4)` + "\n" + `echo ${result}` + "\n" + `! echo ${result} | grep -E -q "(100% packet loss)|(0 sent)|(no egress interface)"`)
 }
 func (s *Suite) TestMemif2Wireguard2Kernel() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Memif2Wireguard2Kernel")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Memif2Wireguard2Kernel")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -230,7 +230,7 @@ func (s *Suite) TestMemif2Wireguard2Kernel() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestMemif2Wireguard2Memif() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Memif2Wireguard2Memif")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Memif2Wireguard2Memif")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})

@@ -29,7 +29,7 @@ func (s *Suite) SetupSuite() {
 			v.SetupSuite()
 		}
 	}
-	r := s.Runner("../nsm-deployments-k8s/examples/k8s_monolith")
+	r := s.Runner("../deployments-k8s/examples/k8s_monolith")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns nsm-system`)
 	})
@@ -38,7 +38,7 @@ func (s *Suite) SetupSuite() {
 	r.Run(`kubectl get services registry -n nsm-system -o go-template='{{index (index (index (index .status "loadBalancer") "ingress") 0) "ip"}}'`)
 }
 func (s *Suite) TestKernel2Wireguard2Kernel() {
-	r := s.Runner("../nsm-deployments-k8s/examples/k8s_monolith/usecases/Kernel2Wireguard2Kernel")
+	r := s.Runner("../deployments-k8s/examples/k8s_monolith/usecases/Kernel2Wireguard2Kernel")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})

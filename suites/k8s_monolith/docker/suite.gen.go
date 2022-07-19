@@ -21,7 +21,7 @@ func (s *Suite) SetupSuite() {
 			v.SetupSuite()
 		}
 	}
-	r := s.Runner("../nsm-deployments-k8s/examples/k8s_monolith/docker")
+	r := s.Runner("../deployments-k8s/examples/k8s_monolith/docker")
 	s.T().Cleanup(func() {
 		r.Run(`docker compose -f docker-compose.yaml -f docker-compose.override.yaml down`)
 	})

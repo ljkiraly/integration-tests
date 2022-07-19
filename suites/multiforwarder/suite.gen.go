@@ -23,7 +23,7 @@ func (s *Suite) SetupSuite() {
 			v.SetupSuite()
 		}
 	}
-	r := s.Runner("../nsm-deployments-k8s/examples/multiforwarder")
+	r := s.Runner("../deployments-k8s/examples/multiforwarder")
 	s.T().Cleanup(func() {
 		r.Run(`WH=$(kubectl get pods -l app=admission-webhook-k8s -n nsm-system --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')` + "\n" + `kubectl delete mutatingwebhookconfiguration ${WH}` + "\n" + `kubectl delete ns nsm-system`)
 	})
@@ -32,7 +32,7 @@ func (s *Suite) SetupSuite() {
 	r.Run(`WH=$(kubectl get pods -l app=admission-webhook-k8s -n nsm-system --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')` + "\n" + `kubectl wait --for=condition=ready --timeout=1m pod ${WH} -n nsm-system`)
 }
 func (s *Suite) TestKernel2Kernel() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Kernel2Kernel")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Kernel2Kernel")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -50,7 +50,7 @@ func (s *Suite) TestKernel2Kernel() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestKernel2Kernel_Vfio2Noop() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Kernel2Kernel&Vfio2Noop")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Kernel2Kernel&Vfio2Noop")
 	s.T().Cleanup(func() {
 		r.Run(`NSE_VFIO=$(kubectl get pods -l app=nse-vfio -n ${NAMESPACE} --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')`)
 		r.Run(`kubectl -n ${NAMESPACE} exec ${NSE_VFIO} --container ponger -- /bin/bash -c '\` + "\n" + `  sleep 10 && kill $(pgrep "pingpong") 1>/dev/null 2>&1 &                    \` + "\n" + `'`)
@@ -79,7 +79,7 @@ func (s *Suite) TestKernel2Kernel_Vfio2Noop() {
 	r.Run(`dpdk_ping ${CLIENT_MAC} ${SERVER_MAC}`)
 }
 func (s *Suite) TestKernel2Vxlan2Kernel() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Kernel2Vxlan2Kernel")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Kernel2Vxlan2Kernel")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -97,7 +97,7 @@ func (s *Suite) TestKernel2Vxlan2Kernel() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE} -- ping -c 4 172.16.1.101`)
 }
 func (s *Suite) TestKernel2Vxlan2Kernel_Vfio2Noop() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Kernel2Vxlan2Kernel&Vfio2Noop")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Kernel2Vxlan2Kernel&Vfio2Noop")
 	s.T().Cleanup(func() {
 		r.Run(`NSE_VFIO=$(kubectl get pods -l app=nse-vfio -n ${NAMESPACE} --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')`)
 		r.Run(`kubectl -n ${NAMESPACE} exec ${NSE_VFIO} --container ponger -- /bin/bash -c '\` + "\n" + `  sleep 10 && kill $(pgrep "pingpong") 1>/dev/null 2>&1 &                    \` + "\n" + `'`)
@@ -126,7 +126,7 @@ func (s *Suite) TestKernel2Vxlan2Kernel_Vfio2Noop() {
 	r.Run(`dpdk_ping ${CLIENT_MAC} ${SERVER_MAC}`)
 }
 func (s *Suite) TestMemif2Memif() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Memif2Memif")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Memif2Memif")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -144,7 +144,7 @@ func (s *Suite) TestMemif2Memif() {
 	r.Run(`result=$(kubectl exec "${NSE}" -n "${NAMESPACE}" -- vppctl ping 172.16.1.101 repeat 4)` + "\n" + `echo ${result}` + "\n" + `! echo ${result} | grep -E -q "(100% packet loss)|(0 sent)|(no egress interface)"`)
 }
 func (s *Suite) TestSriovKernel2Noop() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/SriovKernel2Noop")
+	r := s.Runner("../deployments-k8s/examples/use-cases/SriovKernel2Noop")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -160,7 +160,7 @@ func (s *Suite) TestSriovKernel2Noop() {
 	r.Run(`kubectl -n ${NAMESPACE} exec ${NSC} -- ping -c 4 172.16.1.100`)
 }
 func (s *Suite) TestVfio2Noop() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Vfio2Noop")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Vfio2Noop")
 	s.T().Cleanup(func() {
 		r.Run(`NSE=$(kubectl -n ${NAMESPACE} get pods -l app=nse-vfio --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')`)
 		r.Run(`kubectl -n ${NAMESPACE} exec ${NSE} --container ponger -- /bin/bash -c '\` + "\n" + `  sleep 10 && kill $(pgrep "pingpong") 1>/dev/null 2>&1 &               \` + "\n" + `'`)

@@ -21,7 +21,7 @@ func (s *Suite) SetupSuite() {
 			v.SetupSuite()
 		}
 	}
-	r := s.Runner("../nsm-deployments-k8s/examples/nsm_istio/spire")
+	r := s.Runner("../deployments-k8s/examples/nsm_istio/spire")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl --kubeconfig=$KUBECONFIG1 delete crd spiffeids.spiffeid.spiffe.io` + "\n" + `kubectl --kubeconfig=$KUBECONFIG2 delete crd spiffeids.spiffeid.spiffe.io` + "\n" + `kubectl --kubeconfig=$KUBECONFIG1 delete ns spire` + "\n" + `kubectl --kubeconfig=$KUBECONFIG2 delete ns spire`)
 	})

@@ -27,7 +27,7 @@ func (s *Suite) SetupSuite() {
 			v.SetupSuite()
 		}
 	}
-	r := s.Runner("../nsm-deployments-k8s/examples/interdomain")
+	r := s.Runner("../deployments-k8s/examples/interdomain")
 	s.T().Cleanup(func() {
 		r.Run(`export KUBECONFIG=$KUBECONFIG1 && kubectl delete ns nsm-system`)
 		r.Run(`export KUBECONFIG=$KUBECONFIG2 && kubectl delete ns nsm-system`)
@@ -47,7 +47,7 @@ func (s *Suite) SetupSuite() {
 	r.Run(`kubectl get services registry -n nsm-system -o go-template='{{index (index (index (index .status "loadBalancer") "ingress") 0) "ip"}}'`)
 }
 func (s *Suite) TestFloatingKernel2Vxlan2Kernel() {
-	r := s.Runner("../nsm-deployments-k8s/examples/interdomain/usecases/FloatingKernel2Vxlan2Kernel")
+	r := s.Runner("../deployments-k8s/examples/interdomain/usecases/FloatingKernel2Vxlan2Kernel")
 	s.T().Cleanup(func() {
 		r.Run(`export KUBECONFIG=$KUBECONFIG2`)
 		r.Run(`kubectl delete ns ${NAMESPACE1}`)
@@ -73,7 +73,7 @@ func (s *Suite) TestFloatingKernel2Vxlan2Kernel() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE1} -- ping -c 4 172.16.1.3`)
 }
 func (s *Suite) TestFloatingKernel2Wireguard2Kernel() {
-	r := s.Runner("../nsm-deployments-k8s/examples/interdomain/usecases/FloatingKernel2Wireguard2Kernel")
+	r := s.Runner("../deployments-k8s/examples/interdomain/usecases/FloatingKernel2Wireguard2Kernel")
 	s.T().Cleanup(func() {
 		r.Run(`export KUBECONFIG=$KUBECONFIG2`)
 		r.Run(`kubectl delete ns ${NAMESPACE1}`)
@@ -98,7 +98,7 @@ func (s *Suite) TestFloatingKernel2Wireguard2Kernel() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE1} -- ping -c 4 172.16.1.3`)
 }
 func (s *Suite) TestKernel2Vxlan2Kernel() {
-	r := s.Runner("../nsm-deployments-k8s/examples/interdomain/usecases/Kernel2Vxlan2Kernel")
+	r := s.Runner("../deployments-k8s/examples/interdomain/usecases/Kernel2Vxlan2Kernel")
 	s.T().Cleanup(func() {
 		r.Run(`export KUBECONFIG=$KUBECONFIG1`)
 		r.Run(`kubectl delete ns ${NAMESPACE2}`)
@@ -124,7 +124,7 @@ func (s *Suite) TestKernel2Vxlan2Kernel() {
 	r.Run(`kubectl exec ${NSE} -n ${NAMESPACE1} -- ping -c 4 172.16.1.3`)
 }
 func (s *Suite) TestKernel2Wireguard2Kernel() {
-	r := s.Runner("../nsm-deployments-k8s/examples/interdomain/usecases/Kernel2Wireguard2Kernel")
+	r := s.Runner("../deployments-k8s/examples/interdomain/usecases/Kernel2Wireguard2Kernel")
 	s.T().Cleanup(func() {
 		r.Run(`export KUBECONFIG=$KUBECONFIG1`)
 		r.Run(`kubectl delete ns ${NAMESPACE2}`)

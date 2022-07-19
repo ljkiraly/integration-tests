@@ -23,7 +23,7 @@ func (s *Suite) SetupSuite() {
 			v.SetupSuite()
 		}
 	}
-	r := s.Runner("../nsm-deployments-k8s/examples/sriov")
+	r := s.Runner("../deployments-k8s/examples/sriov")
 	s.T().Cleanup(func() {
 		r.Run(`WH=$(kubectl get pods -l app=admission-webhook-k8s -n nsm-system --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')` + "\n" + `kubectl delete mutatingwebhookconfiguration ${WH}` + "\n" + `kubectl delete ns nsm-system`)
 	})
@@ -31,7 +31,7 @@ func (s *Suite) SetupSuite() {
 	r.Run(`kubectl apply -k https://github.com/networkservicemesh/deployments-k8s/examples/sriov?ref=97ac28963a8e86054ced1884a04e241d53dfcdd4`)
 }
 func (s *Suite) TestSriovKernel2Noop() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/SriovKernel2Noop")
+	r := s.Runner("../deployments-k8s/examples/use-cases/SriovKernel2Noop")
 	s.T().Cleanup(func() {
 		r.Run(`kubectl delete ns ${NAMESPACE}`)
 	})
@@ -47,7 +47,7 @@ func (s *Suite) TestSriovKernel2Noop() {
 	r.Run(`kubectl -n ${NAMESPACE} exec ${NSC} -- ping -c 4 172.16.1.100`)
 }
 func (s *Suite) TestVfio2Noop() {
-	r := s.Runner("../nsm-deployments-k8s/examples/use-cases/Vfio2Noop")
+	r := s.Runner("../deployments-k8s/examples/use-cases/Vfio2Noop")
 	s.T().Cleanup(func() {
 		r.Run(`NSE=$(kubectl -n ${NAMESPACE} get pods -l app=nse-vfio --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')`)
 		r.Run(`kubectl -n ${NAMESPACE} exec ${NSE} --container ponger -- /bin/bash -c '\` + "\n" + `  sleep 10 && kill $(pgrep "pingpong") 1>/dev/null 2>&1 &               \` + "\n" + `'`)

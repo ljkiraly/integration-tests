@@ -21,7 +21,7 @@ func (s *Suite) SetupSuite() {
 			v.SetupSuite()
 		}
 	}
-	r := s.Runner("../nsm-deployments-k8s/examples/nsm_istio/loadbalancer")
+	r := s.Runner("../deployments-k8s/examples/nsm_istio/loadbalancer")
 	s.T().Cleanup(func() {
 		r.Run(`if [[ ! -z $CLUSTER1_CIDR ]]; then` + "\n" + `  kubectl --kubeconfig=$KUBECONFIG2 delete ns metallb-system  ` + "\n" + `fi`)
 		r.Run(`if [[ ! -z $CLUSTER2_CIDR ]]; then` + "\n" + `  kubectl --kubeconfig=$KUBECONFIG1 delete ns metallb-system  ` + "\n" + `fi`)
